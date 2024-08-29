@@ -60,8 +60,8 @@ export default function Footer() {
 
             {/* Footer Bottom */}
             <div className="text-center mt-8">
-                <p className="text-sm">
-                    &copy; BetterWorld.
+                <p className="text-sm font-semibold">
+                    With 💚 By Fiza Sayyed
                 </p>
             </div>
         </footer>

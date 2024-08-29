@@ -56,20 +56,25 @@ export default function Donation() {
                     <AccordionItem value="item-1">
                         <AccordionTrigger>How can I make donations?</AccordionTrigger>
                         <AccordionContent>
-                            Yes. It adheres to the WAI-ARIA design pattern.
+                            You can easily make a donation by visiting our donation page and selecting the cause you wish to support.
+                            Simply choose your preferred donation amount, fill in your details, and proceed with the payment.
+                            We offer various payment methods to ensure that your donation process is as seamless as possible.
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
                         <AccordionTrigger>Will my Donation be Used?</AccordionTrigger>
                         <AccordionContent>
-                            Yes. It comes with default styles that matches the other
-                            components&apos; aesthetic.
+                            Your donation will go directly towards the cause you choose to support.
+                            We are committed to transparency and ensuring that every contribution makes a meaningful impact.
+                            While our detailed allocation reports are a work in progress, rest assured that we are working diligently to provide you with clear insights into how your donations are making a difference.
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-3">
                         <AccordionTrigger>Can I setup a recurring Donation?</AccordionTrigger>
                         <AccordionContent>
-                            Yes. It's animated by default, but you can disable it if you prefer.
+                            We’re excited to let you know that recurring donations are a feature we’re actively working on! Soon, you’ll be able to set up automatic donations on a schedule that suits you,
+                            making it easier than ever to support the causes you care about consistently.
+                            Stay tuned for updates as we continue to enhance this feature.
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>

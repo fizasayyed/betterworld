@@ -8,7 +8,7 @@ export default function ImageArea() {
         <><div className="relative mx-10">
             <AspectRatio ratio={16 / 6} className="rounded-2xl overflow-hidden">
                 <Image
-                    src="/images/donate1.jpg"
+                    src="/images/tree1.jpg"
                     alt="Donation photo"
                     fill
                     className="h-full w-full object-cover" />
