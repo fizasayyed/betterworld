@@ -20,7 +20,7 @@ export default function ImageArea() {
                     <h1 className="text-6xl text-white leading-none font-bold">Others</h1>
                 </div>
             </div>
-            <Button size="xl" className="absolute bottom-10 right-10 font-semibold text-gray-700">
+            <Button size="xl" className="absolute bottom-10 right-10 text-2xl font-semibold text-gray-700">
                 Start Donating Today
             </Button>
         </div>

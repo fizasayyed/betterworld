@@ -19,8 +19,8 @@ export default function Donation() {
                     Select Your Donation
                 </p>
             </div>
-            <div className="flex justify-between mt-8 w-full max-w-7xl">
-                {[10, 50, 100].map((amount) => (
+            <div className="flex justify-between mt-8 w-full max-w-8xl">
+                {[10, 25, 50, 100].map((amount) => (
                     <Card key={amount} className="w-[350px]">
                         <CardHeader>
                             <CardTitle>₹ {amount}</CardTitle>
@@ -37,7 +37,7 @@ export default function Donation() {
                             </form>
                         </CardContent>
                         <CardFooter className="flex justify-between">
-                            <Button size="default" className="font-semibold text-gray-700">Donate</Button>
+                            <Button size="sm" className="font-semibold text-gray-700">Donate</Button>
                         </CardFooter>
                     </Card>
                 ))}
