@@ -13,7 +13,7 @@ export function MenubarDemo() {
     return (
         <div className="mx-10 my-5">
             <Menubar>
-                <h1 className="text-2xl font-semibold text-gray-700"><strong>BetterWorld </strong>&nbsp;&nbsp;|</h1>
+                <h1 className="text-lg font-semibold text-gray-700"><strong>BetterWorld </strong>&nbsp;&nbsp;|</h1>
                 <MenubarMenu>
                     <MenubarTrigger>Home</MenubarTrigger>
                 </MenubarMenu>

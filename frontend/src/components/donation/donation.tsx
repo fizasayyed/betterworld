@@ -20,15 +20,15 @@ import {
 
 export default function Donation() {
     return (
-        <div className="flex flex-col items-center px-10 mt-10">
+        <div className="flex flex-col items-center px-10 mt-8">
             <div className="flex">
-                <p className="text-[80px] text-gray-700 font-semibold">
+                <p className="text-[60px] text-gray-700 font-extrabold">
                     Select Your Donation
                 </p>
             </div>
-            <div className="flex justify-between px-10 mt-8 w-full max-w-8xl">
+            <div className="flex justify-between px-8 mt-8 w-full max-w-7xl">
                 {[10, 25, 50, 100].map((amount) => (
-                    <Card key={amount} className="w-[350px]">
+                    <Card key={amount} className="w-[250px]">
                         <CardHeader>
                             <CardTitle>₹ {amount}</CardTitle>
                             <CardDescription>Make an impact with your donation.</CardDescription>
@@ -49,8 +49,8 @@ export default function Donation() {
                     </Card>
                 ))}
             </div>
-            <div className="w-full max-w-8xl mt-10 px-20">
-                <Accordion type="single" collapsible className="font-semibold text-2xl mt-20 w-full max-w-8xl">
+            <div className="w-full max-w-8xl mt-8 px-20">
+                <Accordion type="single" collapsible className="font-semibold text-lg mt-20 w-full max-w-8xl">
                     <p className="w-full text-4xl mb-2 fonts-extrabold text-gray-700">Frequently Asked</p>
                     <p className="w-full text-4xl mb-5 fonts-extrabold text-gray-700">Questions.</p>
                     <AccordionItem value="item-1">
