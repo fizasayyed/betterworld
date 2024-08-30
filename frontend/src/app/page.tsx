@@ -6,8 +6,9 @@ import { MenubarDemo } from "@/components/navbar/navbar";
 export default function Home() {
   return (
     <>
-      <MenubarDemo />
-      <ImageArea />
+      <div className="top-0 sticky">
+        <MenubarDemo />
+      </div><ImageArea />
       <Donation />
       <Footer />
     </>

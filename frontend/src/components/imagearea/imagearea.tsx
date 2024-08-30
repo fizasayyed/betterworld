@@ -1,9 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client"
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "../ui/button";
+import { useRouter } from 'next/navigation';
 
 export default function ImageArea() {
+    const router = useRouter();
     return (
         <><div className="relative mx-10">
             <AspectRatio ratio={16 / 6} className="rounded-2xl overflow-hidden">
@@ -20,7 +23,10 @@ export default function ImageArea() {
                     <h1 className="text-6xl text-white leading-none font-bold">Others</h1>
                 </div>
             </div>
-            <Button size="xl" className="absolute bottom-10 right-10 text-lg font-semibold text-gray-700">
+            <Button
+                onClick={() => router.push('/donate')}
+                size="xl"
+                className="absolute bottom-10 right-10 text-lg font-semibold text-gray-700">
                 Start Donating Today
             </Button>
         </div>
