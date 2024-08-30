@@ -13,7 +13,7 @@ export const StepProgressBar: React.FC<StepProgressBarProps> = ({ currentStep })
     ];
 
     return (
-        <div className="flex flex-col items-start space-y-0 mb-8 ml-5">
+        <div className="flex flex-col items-start space-y-0 mb-8 my-12 ml-5">
             {steps.map((step, index) => (
                 <div key={step.id} className="flex items-start">
                     <div className="flex flex-col items-center">
