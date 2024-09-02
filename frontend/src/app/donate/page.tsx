@@ -23,12 +23,18 @@ export default function DetailsPage() {
     const router = useRouter();
     const { updateName, updateEmail } = useFormStore();
 
+    // Retrieve name, email from the state if any
+    const { name, email } = useFormStore((state) => ({
+        name: state.name,
+        email: state.email,
+    }));
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
-            email: ""
+            name: name || "",
+            email: email || ""
         },
     });
 
@@ -61,10 +67,9 @@ export default function DetailsPage() {
                     <StepProgressBar currentStep={currentStep} />
                 </div>
                 <div className="flex-1 pl-20 pr-5 py-7">
-                    {/* <Image className="" src="/images/seal.jpg" alt="Earth photo" width="280" height="280" /> */}
-                    <h2 className="text-2xl font-bold mb-6">Tell Us More About Yourself</h2>
+                    <h2 className="text-xl font-bold mb-6">Tell Us More About Yourself</h2>
                     <div className="space-y-6">
-                        <Card className="max-w-[450px] p-10">
+                        <Card className="max-w-[400px] p-10">
                             <Form {...form}>
                                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                                     <div>
@@ -75,7 +80,8 @@ export default function DetailsPage() {
                                             id="name" {...register("name")}
                                             type="text"
                                             className="mt-1 block max-w-md px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
-                                            placeholder="Your name" />
+                                            placeholder="Your name"
+                                        />
                                         {errors.name && <FormDescription className="text-red-500 font-sm mt-1">{errors.name.message}</FormDescription>}
                                     </div>
                                     <div>

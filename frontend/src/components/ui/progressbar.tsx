@@ -6,10 +6,9 @@ interface StepProgressBarProps {
 
 export const StepProgressBar: React.FC<StepProgressBarProps> = ({ currentStep }) => {
     const steps = [
-        { id: 1, label: 'Fill the personal information' },
-        { id: 2, label: 'Fill the job information' },
-        { id: 3, label: 'Fill the family information' },
-        { id: 4, label: 'Fill the education information' }
+        { id: 1, label: 'Provide Your Personal Details' },
+        { id: 2, label: 'Enter Payment Information' },
+        { id: 3, label: 'Complete the Payment' },
     ];
 
     return (
