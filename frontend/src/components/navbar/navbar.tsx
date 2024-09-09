@@ -14,6 +14,7 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 import Image from "next/image";
 import SignIn from "../signinform/signin";
+import { SignOut } from "../signoutform/signout";
 
 export function MenubarDemo() {
     const router = useRouter();
@@ -50,11 +51,16 @@ export function MenubarDemo() {
                     <MenubarMenu>
                         {session ? (
                             <div className="flex items-center">
-                                <span className="mr-2">Hello, {session.user?.name}</span>
-                                <Avatar>
-                                    <AvatarImage src={session.user?.image || "https://github.com/shadcn.png"} />
-                                    <AvatarFallback>{session.user?.name?.[0] || "U"}</AvatarFallback>
-                                </Avatar>
+                                {/* <span className="">Hello, {session.user?.name}</span> */}
+                                <MenubarTrigger>
+                                    <Avatar>
+                                        <AvatarImage src={session.user?.image || "https://github.com/shadcn.png"} />
+                                        <AvatarFallback>{session.user?.name?.[0] || "U"}</AvatarFallback>
+                                    </Avatar>
+                                    <MenubarContent className="min-w-[unset] w-auto px-3 py-2">
+                                        <SignOut />
+                                    </MenubarContent>
+                                </MenubarTrigger>
                             </div>
                         ) : (
                             <SignIn name="Sign in" />
