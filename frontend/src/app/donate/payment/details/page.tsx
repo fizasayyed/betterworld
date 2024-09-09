@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { MenubarDemo } from "@/components/navbar/navbar";
 import { StepProgressBar } from "@/components/ui/progressbar";
 import { useFormStore } from "@/lib/useFormStore";
-import Image from "next/image";
 import Footer from "@/components/footer/footer";
 
 const formSchema = z.object({
@@ -20,7 +19,6 @@ const formSchema = z.object({
 
 export default function PaymentsPage() {
     const currentStep = 2; // For progress bar
-    const router = useRouter();
     const { updateUPI } = useFormStore();
 
     // Retrieve name, email from the state if any
@@ -84,7 +82,7 @@ export default function PaymentsPage() {
                                 <div className="flex justify-center">
                                     <Button
                                         type="submit"
-                                        className="px-4 py-2 text-black font-semibold rounded-md mt-4 bg-yellow-500 hover:bg-yellow-600">
+                                        className="px-4 py-2 text-black font-semibold rounded-md mt-4">
                                         Proceed to Payment
                                     </Button>
                                 </div>
@@ -93,9 +91,7 @@ export default function PaymentsPage() {
                     </Card>
                 </div>
             </div>
-            <div>
-                <Footer />
-            </div>
+            <Footer />
         </>
 
     )

@@ -10,7 +10,7 @@ import Footer from "@/components/footer/footer";
 
 export default function DetailsPage() {
     const currentStep = 1; // For progress bar
-    const { data: session, status } = useSession();
+    const { data: session, status } = useSession(); // will use this later on to send backend the deets of signed in user
     const router = useRouter();
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function DetailsPage() {
                         </div>
                         <div className="flex justify-center">
                             {status === "unauthenticated" ? (
-                                <SignIn />
+                                <SignIn name="Sign in with Google" />
                             ) : (
                                 <p>Redirecting to payment details...</p>
                             )}
@@ -43,9 +43,7 @@ export default function DetailsPage() {
                     </Card>
                 </div>
             </div>
-            <div>
-                <Footer />
-            </div>
+            <Footer />
         </>
     );
 }
