@@ -6,26 +6,35 @@ interface StepProgressBarProps {
 
 export const StepProgressBar: React.FC<StepProgressBarProps> = ({ currentStep }) => {
     const steps = [
-        { id: 1, label: 'Provide Your Personal Details' },
+        { id: 1, label: 'Provide Your Personal Details' }, // Not using labels as of now
         { id: 2, label: 'Enter Payment Information' },
         { id: 3, label: 'Complete the Payment' },
     ];
 
     return (
-        <div className="flex flex-col items-start space-y-0 mb-8 my-12 ml-5">
+        <div className="flex items-center justify-center space-x-4 mb-8">
             {steps.map((step, index) => (
-                <div key={step.id} className="flex items-start">
+                <div key={step.id} className="flex items-center">
                     <div className="flex flex-col items-center">
-                        <div className={`flex items-center justify-center w-10 h-10 rounded-full ${currentStep === step.id ? 'bg-yellow-500 text-yellow-900' : 'bg-yellow-300 text-yellow-900'}`}>
+                        {/* Step Circle */}
+                        <div
+                            className={`flex items-center justify-center w-10 h-10 rounded-full ${currentStep === step.id
+                                ? 'border-4 bg-white border-yellow-500 text-yellow-900'
+                                : 'border-4 bg-white border-gray-300 text-yellow-900'
+                                }`}
+                        >
                             {step.id}
                         </div>
-                        {index < steps.length - 1 && (
-                            <div className={`border-l-4 h-12 ${currentStep >= step.id + 1 ? 'border-yellow-700' : 'border-yellow-300'}`}></div>
-                        )}
                     </div>
-                    <div className={`ml-4 pt-2 ${currentStep === step.id ? 'text-yellow-900 font-semibold' : 'text-yellow-500'}`}>
-                        {step.label}
-                    </div>
+                    {/* Connector */}
+                    {index < steps.length - 1 && (
+                        <div
+                            className={`w-16 h-1 ml-4 ${currentStep >= step.id + 1
+                                ? 'bg-yellow-500'
+                                : 'bg-gray-300'
+                                }`}
+                        ></div>
+                    )}
                 </div>
             ))}
         </div>
