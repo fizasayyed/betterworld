@@ -1,0 +1,8 @@
+import mongoose from 'mongodb';
+
+const userSchema = new mongoose.Schema({
+    username: String,
+    email: String,
+});
+
+module.exports = mongoose.model('User', userSchema);
