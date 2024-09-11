@@ -1,8 +1,17 @@
-import mongoose from 'mongodb';
+const userSchema = {
+    bsonType: 'object',
+    required: ['username', 'email'],
+    properties: {
+        username: {
+            bsonType: 'string',
+            description: 'must be a string and is required',
+        },
+        email: {
+            bsonType: 'string',
+            pattern: '^.+@.+\\..+$',
+            description: 'must be a valid email and is required',
+        },
+    },
+};
 
-const userSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-});
-
-module.exports = mongoose.model('User', userSchema);
+export default userSchema;
