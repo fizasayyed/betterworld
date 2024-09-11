@@ -2,7 +2,7 @@ import {
     database
 } from "../../config/database.js";
 
-export async function storeAllUsers(req, res) {
+export async function storeAllUsers(res) {
     try {
         const string = "Hello testing backend";
         res.status(200).json(string);
@@ -15,16 +15,32 @@ export async function storeAllUsers(req, res) {
 
 export async function registerUser(req, res) {
     try {
-        // Get the 'users' collection
         const usersCollection = database.collection('users');
-        // Validate and insert the user data according to userSchema
-        const user = {
-            username: req.body.username,
-            email: req.body.email,
+
+        const {
+            username,
+            email
+        } = req.body;
+
+        // Check if a user with the same email already exists
+        const existingUser = await usersCollection.findOne({
+            email: email
+        });
+
+        if (existingUser) {
+            return res.status(400).json({
+                message: 'User with this email already exists',
+            });
+        }
+
+        // Create a new user object
+        const newUser = {
+            username,
+            email,
         };
 
         // Insert the new user into the database
-        const result = await usersCollection.insertOne(user);
+        const result = await usersCollection.insertOne(newUser);
 
         res.status(201).json({
             message: 'User stored successfully',
@@ -34,8 +50,8 @@ export async function registerUser(req, res) {
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            message: 'Failed to register user',
+            message: 'Failed to store user',
             error: error.message,
         });
     }
-};
+}
