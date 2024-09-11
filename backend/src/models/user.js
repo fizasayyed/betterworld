@@ -1,3 +1,4 @@
+// Validation schema for users collection
 const userSchema = {
     bsonType: 'object',
     required: ['username', 'email'],

@@ -27,7 +27,7 @@ export async function registerUser(req, res) {
         const result = await usersCollection.insertOne(user);
 
         res.status(201).json({
-            message: 'User registered successfully',
+            message: 'User stored successfully',
             userId: result.insertedId,
         });
 
