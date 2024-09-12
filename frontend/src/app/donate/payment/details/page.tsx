@@ -1,7 +1,9 @@
 "use client"
+
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { Form, FormDescription } from "@/components/ui/form";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -19,6 +21,7 @@ const formSchema = z.object({
 export default function PaymentsPage() {
     const currentStep = 2; // For progress bar
     const { updateUPI } = useFormStore();
+    const router = useRouter();
 
     // Retrieve name, email from the state if any
     const { upi_id } = useFormStore((state) => ({
@@ -38,7 +41,7 @@ export default function PaymentsPage() {
         // Update Zustand store with form values
         updateUPI(values.upi_id);
 
-        // router.push('/donate/payment/details');
+        router.push('/donate/create/payment/stripe');
         console.log(values);
     }
 

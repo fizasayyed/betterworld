@@ -4,14 +4,14 @@ import {
 const router = Router();
 import {
     storeAllUsers,
-    registerUser
+    testAPI
 } from '../controllers/userController.js';
 import {
     createPayment
 } from '../controllers/paymentController.js';
 
-router.get('/test', storeAllUsers);
-router.post('/register', registerUser);
+router.get('/test', testAPI);
+router.post('/register', storeAllUsers);
 router.post('/create/payment', createPayment);
 
 export default router;

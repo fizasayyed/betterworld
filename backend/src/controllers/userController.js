@@ -2,7 +2,7 @@ import {
     database
 } from "../../config/database.js";
 
-export async function storeAllUsers(req, res) {
+export async function testAPI(req, res) {
     try {
         const string = "Hello testing backend";
         res.status(200).json(string);
@@ -11,7 +11,7 @@ export async function storeAllUsers(req, res) {
     }
 }
 
-export async function registerUser(req, res) {
+export async function storeAllUsers(req, res) {
     try {
         const usersCollection = database.collection('users');
 
