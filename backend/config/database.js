@@ -33,19 +33,22 @@ async function createUsersCollection() {
 }
 
 async function connectDatabase() {
+    if (client && database) {
+        console.log('Reusing existing database connection');
+        return database;
+    }
 
-    if (!database) {
+    try {
         // Create a MongoClient with a MongoClientOptions object to set the Stable API version
         client = new MongoClient(process.env.MONGO_URI, {
             serverApi: {
                 version: ServerApiVersion.v1,
                 strict: true,
                 deprecationErrors: true,
-            }
+            },
+            maxPoolSize: 10,
         });
-    }
 
-    try {
         // Connect the client to the server
         await client.connect("");
         database = client.db("betterworld");
@@ -55,7 +58,9 @@ async function connectDatabase() {
             ping: 1
         });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
+
         createUsersCollection().catch(console.dir);
+
         return client.db("betterworld");
 
     } catch (error) {

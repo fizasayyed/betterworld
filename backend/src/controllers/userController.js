@@ -2,14 +2,12 @@ import {
     database
 } from "../../config/database.js";
 
-export async function storeAllUsers(res) {
+export async function storeAllUsers(req, res) {
     try {
         const string = "Hello testing backend";
         res.status(200).json(string);
     } catch (error) {
-        res.status(500).json({
-            error
-        });
+        res.status(500).json(error.message);
     }
 }
 
@@ -43,14 +41,14 @@ export async function registerUser(req, res) {
         const result = await usersCollection.insertOne(newUser);
 
         res.status(201).json({
-            message: 'User stored successfully',
+            message: '✅ User stored successfully',
             userId: result.insertedId,
         });
 
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            message: 'Failed to store user',
+            message: '❌ Failed to store user',
             error: error.message,
         });
     }
