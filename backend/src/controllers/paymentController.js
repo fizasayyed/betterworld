@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-export async function createPayment() {
+export async function createPayment(req, res) {
     const {
         amount,
         currency

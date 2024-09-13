@@ -1,18 +1,27 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import domain from "@/lib/api/endpoint";
 
-export const fetchClientSecret = async () => {
-    // Make a POST request to your Node.js backend to create a PaymentIntent
-    return fetch(`${domain.hostname}/${domain.endpoint.createPayment}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ amount: 50 }), // Example: $50
-    })
-        .then((res) => res.json())
-        .then((data) => data.client_secret);
-}
+export const fetchClientSecret = async (amount: number, currency = 'usd') => {
+    try {
+        const response = await fetch(`${domain.hostname}/${domain.endpoint.createPayment}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ amount, currency }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data.client_secret;
+    } catch (error) {
+        console.error("Error fetching client secret:", error);
+        throw error;
+    }
+};
 
 export const testService = async () => {
 
