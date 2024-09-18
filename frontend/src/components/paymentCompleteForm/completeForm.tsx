@@ -18,9 +18,9 @@ const STATUS_CONTENT_MAP = {
         icon: "❌",
     },
     default: {
-        text: "Something went wrong, please try again.",
-        iconColor: "#DF1B41",
-        icon: "❌",
+        text: "Please wait while we process your request.",
+        iconColor: "#6D6E78",
+        icon: "⏳",
     },
 };
 

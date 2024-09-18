@@ -9,22 +9,23 @@ const CheckoutForm = () => {
     const elements = useElements(); // Stripe elements
     const router = useRouter();
 
-    const { updatePaymentStatus } = useFormStore((state) => ({
-        payment_status: state.payment_status,
-        updatePaymentStatus: state.updatePaymentStatus,
-    }));
+    // const { updatePaymentStatus } = useFormStore((state) => ({
+    //     payment_status: state.payment_status,
+    //     updatePaymentStatus: state.updatePaymentStatus,
+    // }));
 
     useEffect(() => {
         const clientSecret = new URLSearchParams(window.location.search).get('payment_intent_client_secret');
+        console.log("client secret: " + clientSecret);
         if (clientSecret) {
             stripe?.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
                 if (paymentIntent?.status === 'succeeded') {
-                    updatePaymentStatus(paymentIntent.id); // Store the payment intent ID
-                    // router.push('/donate/create/payment/stripe/status');
+                    // updatePaymentStatus(paymentIntent.id); // Store the payment intent ID
+                    router.push('/donate/create/payment/stripe/status');
                 }
             });
         }
-    }, [router, stripe, updatePaymentStatus]);
+    }, [router, stripe]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -44,7 +45,8 @@ const CheckoutForm = () => {
         if (error) {
             console.error(error.message);
         } else if (paymentIntent?.status === 'succeeded') {
-            updatePaymentStatus(paymentIntent.id); // Store the payment intent ID
+            // updatePaymentStatus(paymentIntent.id); // Store the payment intent ID
+            router.push('/donate/create/payment/stripe/status');
         }
     };
 
