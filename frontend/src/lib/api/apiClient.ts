@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import domain from "@/lib/api/endpoint";
+import { useStripe } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 
-export const fetchClientSecret = async (amount: number, currency = 'usd') => {
+export const createPaymentIntent = async (amount: number, currency = 'usd') => {
     try {
         const response = await fetch(`${domain.hostname}/${domain.endpoint.createPayment}`, {
             method: "POST",
@@ -21,6 +23,14 @@ export const fetchClientSecret = async (amount: number, currency = 'usd') => {
         console.error("Error fetching client secret:", error);
         throw error;
     }
+};
+
+export const handlePaymentMethod = async () => {
+    const stripe = useStripe();
+    await stripe?.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+    })
 };
 
 export const testService = async () => {

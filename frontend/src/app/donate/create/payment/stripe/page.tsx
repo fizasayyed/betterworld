@@ -1,86 +1,68 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
+import { useEffect, useState } from "react"
+import { loadStripe } from "@stripe/stripe-js"
 import {
-    EmbeddedCheckoutProvider,
-    EmbeddedCheckout,
-} from "@stripe/react-stripe-js";
-import { fetchClientSecret } from "@/lib/api/apiClient";
-import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogFooter,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+    Elements,
+} from "@stripe/react-stripe-js"
+import { createPaymentIntent } from "@/lib/api/apiClient"
+import { Card } from "@/components/ui/card"
+import { MenubarDemo } from "@/components/navbar/navbar"
+import CheckoutForm from "@/components/checkoutForm/checkoutForm"
+import Footer from "@/components/footer/footer"
+import { StepProgressBar } from "@/components/ui/progressbar"
 
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 
-export default function ProButton() {
-    const [clientSecret, setClientSecret] = useState('');
-    const [amount, setAmount] = useState(''); // State to manage the input amount
+export default function StripeDemo() {
+    const currentStep = 2;
+    const [clientSecret, setClientSecret] = useState(null);
 
-    const getClientSecret = async () => {
-        if (!amount) {
-            console.error('Amount is required');
-            return;
+    useEffect(() => {
+        const getClientSecret = async () => {
+            try {
+                const data = await createPaymentIntent(25, "usd"); // Amount and currency
+                setClientSecret(data); // Set client secret
+            } catch (error) {
+                console.error("Error fetching client secret:", error);
+            }
+        };
+        getClientSecret();
+    }, []);
+
+    const options = clientSecret
+        ? {
+            clientSecret: clientSecret,
         }
-        const secret = await fetchClientSecret(Number(amount), 'usd');
-        setClientSecret(secret);
-    };
-
-    const handleAmountChange = (event) => {
-        setAmount(event.target.value); // Update amount state on input change
-    };
-
-    // Options for the Embedded Checkout form, providing the fetchClientSecret function
-    const options = { clientSecret };
+        : "";
 
     return (
-        <Dialog>
-            <DialogTrigger asChild>
-                <Button
-                    type="button"
-                    variant={"default"}
-
-                >
-                    Open Payment Modal
-                </Button>
-            </DialogTrigger>
-            <DialogContent className="my-4 py-12 xl:max-w-screen-xl">
-                <DialogTitle className="text-xl font-semibold">Pro Membership</DialogTitle>
-                <Label
-                    htmlFor="amount"
-                    className="block text-md font-bold text-gray-700"
-                >
-                    Enter Amount
-                </Label>
-                <Input
-                    id="amount_input"
-                    type="text"
-                    className="mt-1 block max-w-md px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
-                    placeholder="Amount"
-                    value={amount}
-                    onChange={handleAmountChange} // Update state on input change
-                />
-                {clientSecret && (
-                    <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
-                        <EmbeddedCheckout className="max-h-[80dvh]" />
-                    </EmbeddedCheckoutProvider>
-                )}
-                <DialogFooter>
-                    <DialogClose asChild>
-                        <Button type="button" variant="secondary" onClick={getClientSecret}>
-                            Cancel Payment
-                        </Button>
-                    </DialogClose>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
+        <>
+            <div className="overflow-y-hidden">
+                <MenubarDemo />
+            </div>
+            <div className="flex flex-col items-center justify-top py-10">
+                <h2 className="text-xl font-bold mb-6 text-center">
+                    Tell Us More About Yourself
+                </h2>
+                <div className="w-full max-w-md mt-8">
+                    <Card className="mx-auto p-10">
+                        <div className="w-full max-w-md pb-8">
+                            <StepProgressBar currentStep={currentStep} />
+                        </div>
+                        {clientSecret ? (
+                            <Elements stripe={stripePromise} options={options}>
+                                <CheckoutForm />
+                            </Elements>
+                        ) : (
+                            <div>Loading payment details...</div>
+                        )}
+                    </Card>
+                </div>
+            </div>
+            <Footer />
+        </>
     );
 }

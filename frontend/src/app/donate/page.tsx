@@ -16,7 +16,7 @@ export default function DetailsPage() {
 
     useEffect(() => {
         if (status === "authenticated") {
-            router.push("/donate/payment/details");
+            router.push("/donate/create/payment/stripe");
         }
     }, [status, router]);
 

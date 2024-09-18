@@ -16,7 +16,7 @@ export async function createPayment(req, res) {
 
         // Send the clientSecret to the frontend to confirm the payment
         res.status(200).json({
-            client_secret: paymentIntent.client_secret
+            client_secret: paymentIntent.client_secret,
         });
     } catch (err) {
         console.error('Error creating PaymentIntent:', err);
