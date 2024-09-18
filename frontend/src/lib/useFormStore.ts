@@ -4,10 +4,10 @@ import { persist } from 'zustand/middleware';
 interface FormState {
     name: string;
     email: string;
-    upi_id: string,
+    payment_status: string,
     updateName: (name: string) => void;
     updateEmail: (email: string) => void;
-    updateUPI: (upi_id: string) => void;
+    updatePaymentStatus: (payment_status: string) => void;
 }
 
 export const useFormStore = create<FormState>()(
@@ -15,10 +15,10 @@ export const useFormStore = create<FormState>()(
         (set) => ({
             name: '',
             email: '',
-            upi_id: '',
+            payment_status: '',
             updateName: (name) => set({ name }),
             updateEmail: (email) => set({ email }),
-            updateUPI: (upi_id) => set({ upi_id }),
+            updatePaymentStatus: (payment_status) => set({ payment_status }),
         }),
         {
             name: 'form-storage', // unique name for localStorage
