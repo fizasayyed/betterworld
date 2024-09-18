@@ -2,35 +2,36 @@
 
 import { useEffect, useState } from "react"
 import { loadStripe } from "@stripe/stripe-js"
-import {
-    Elements,
-} from "@stripe/react-stripe-js"
+import { Elements } from "@stripe/react-stripe-js"
 import { createPaymentIntent } from "@/lib/api/apiClient"
 import { Card } from "@/components/ui/card"
 import { MenubarDemo } from "@/components/navbar/navbar"
 import CheckoutForm from "@/components/checkoutForm/checkoutForm"
 import Footer from "@/components/footer/footer"
 import { StepProgressBar } from "@/components/ui/progressbar"
+import { useFormStore } from "@/lib/useFormStore"
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 
 export default function StripeDemo() {
     const currentStep = 2;
     const [clientSecret, setClientSecret] = useState(null);
+    const amount = useFormStore((state) => state.amount);
 
     useEffect(() => {
-        const getClientSecret = async () => {
-            try {
-                const data = await createPaymentIntent(25, "usd"); // Amount and currency
-                setClientSecret(data); // Set client secret
-            } catch (error) {
-                console.error("Error fetching client secret:", error);
-            }
-        };
-        getClientSecret();
-    }, []);
+        // Only call createPaymentIntent when amount is available (non-zero or valid)
+        if (amount && amount > 0) {
+            const getClientSecret = async () => {
+                try {
+                    const data = await createPaymentIntent(amount, "usd"); // Amount and currency
+                    setClientSecret(data); // Set client secret
+                } catch (error) {
+                    console.error("Error fetching client secret:", error);
+                }
+            };
+            getClientSecret();
+        }
+    }, [amount]); // Run the effect when 'amount' changes and is valid
 
     const options = clientSecret
         ? {

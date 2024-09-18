@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useFormStore } from '@/lib/useFormStore';
+// import { useEffect } from 'react';
+// import { useFormStore } from '@/lib/useFormStore';
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
@@ -14,18 +14,17 @@ const CheckoutForm = () => {
     //     updatePaymentStatus: state.updatePaymentStatus,
     // }));
 
-    useEffect(() => {
-        const clientSecret = new URLSearchParams(window.location.search).get('payment_intent_client_secret');
-        console.log("client secret: " + clientSecret);
-        if (clientSecret) {
-            stripe?.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-                if (paymentIntent?.status === 'succeeded') {
-                    // updatePaymentStatus(paymentIntent.id); // Store the payment intent ID
-                    router.push('/donate/create/payment/stripe/status');
-                }
-            });
-        }
-    }, [router, stripe]);
+    // useEffect(() => {
+    //     const clientSecret = new URLSearchParams(window.location.search).get('payment_intent_client_secret');
+    //     if (clientSecret) {
+    //         stripe?.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+    //             if (paymentIntent?.status === 'succeeded') {
+    //                 // updatePaymentStatus(paymentIntent.id); // Store the payment intent ID
+    //                 router.push('/donate/create/payment/stripe/status');
+    //             }
+    //         });
+    //     }
+    // }, [router, stripe]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();

@@ -58,8 +58,8 @@ export default function CompletePage() {
                     </Alert>
                 )}
 
-                <Button variant="outline" className="mt-6" onClick={() => window.location.href = '/'}>
-                    Test another
+                <Button variant="outline" className="mt-6" onClick={() => window.location.href = '/donate'}>
+                    Donate Again
                 </Button>
             </div>
         </div>
