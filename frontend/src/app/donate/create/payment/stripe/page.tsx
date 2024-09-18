@@ -47,7 +47,7 @@ export default function StripeDemo() {
                 <h2 className="text-xl font-bold mb-6 text-center">
                     Tell Us More About Yourself
                 </h2>
-                <div className="w-full max-w-md mt-8">
+                <div className="w-full max-w-lg mt-8">
                     <Card className="mx-auto p-10">
                         <div className="w-full max-w-md pb-8">
                             <StepProgressBar currentStep={currentStep} />

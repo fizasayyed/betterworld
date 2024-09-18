@@ -1,28 +1,8 @@
 import React from "react";
 import { useStripe } from "@stripe/react-stripe-js";
-
-const STATUS_CONTENT_MAP = {
-    succeeded: {
-        text: "Payment succeeded",
-        iconColor: "#30B130",
-        icon: "✓",
-    },
-    processing: {
-        text: "Your payment is processing.",
-        iconColor: "#6D6E78",
-        icon: "⏳",
-    },
-    requires_payment_method: {
-        text: "Your payment was not successful, please try again.",
-        iconColor: "#DF1B41",
-        icon: "❌",
-    },
-    default: {
-        text: "Please wait while we process your request.",
-        iconColor: "#6D6E78",
-        icon: "⏳",
-    },
-};
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { CheckCircle } from "lucide-react";
 
 export default function CompletePage() {
     const stripe = useStripe();
@@ -53,33 +33,35 @@ export default function CompletePage() {
     }, [stripe]);
 
     return (
-        <div id="payment-status">
-            <div id="status-icon" style={{ backgroundColor: STATUS_CONTENT_MAP[status].iconColor }}>
-                {STATUS_CONTENT_MAP[status].icon}
+        <div className="flex flex-col items-center justify-center p-1">
+            <div className="text-center">
+                {status === "succeeded" ? (
+                    <Alert className="flex flex-col-2 items-center justify-center bg-gray-100 p-6 rounded-md shadow-md">
+                        <div className="flex justify-center">
+                            <CheckCircle className="w-20 h-20 text-yellow-500" />
+                        </div>
+                        <AlertTitle className="mt-4 text-xl pl-2 font-bold text-green-600">
+                            Payment succeeded!
+                        </AlertTitle>
+                    </Alert>
+                ) : (
+                    <Alert className="flex flex-col-2 items-center justify-center bg-gray-100 p-6 rounded-md shadow-md">
+                        <div className="flex justify-center">
+                            <CheckCircle className="w-20 h-20 text-gray-400" />
+                        </div>
+                        <AlertTitle className="mt-4 text-xl pl-2 font-bold text-gray-700">
+                            Processing payment...
+                        </AlertTitle>
+                        {/* <AlertDescription className="mt-2 text-gray-600">
+                            Please wait while we process your payment.
+                        </AlertDescription> */}
+                    </Alert>
+                )}
+
+                <Button variant="outline" className="mt-6" onClick={() => window.location.href = '/'}>
+                    Test another
+                </Button>
             </div>
-            <h2 id="status-text">{STATUS_CONTENT_MAP[status].text}</h2>
-            {intentId && (
-                <div id="details-table">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td className="TableLabel">Payment Intent ID</td>
-                                <td id="intent-id" className="TableContent">{intentId}</td>
-                            </tr>
-                            <tr>
-                                <td className="TableLabel">Status</td>
-                                <td id="intent-status" className="TableContent">{status}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            )}
-            {intentId && (
-                <a href={`https://dashboard.stripe.com/payments/${intentId}`} id="view-details" target="_blank" rel="noopener noreferrer">
-                    View details
-                </a>
-            )}
-            <a id="retry-button" href="/">Test another</a>
         </div>
     );
 }
