@@ -20,7 +20,7 @@ export default function Footer() {
                 <div className="flex justify-between space-x-16">
                     <div className="flex flex-col space-y-2">
                         <h3 className="font-semibold">Donate</h3>
-                        <a href="#">Environemt</a>
+                        <a href="#">Environment</a>
                         {/* <a href="#">Social</a> */}
                         {/* <a href="#">Medicine</a> */}
                         <a href="#">Disaster</a>

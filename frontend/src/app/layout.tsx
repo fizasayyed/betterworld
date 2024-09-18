@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google"
+import { SessionProvider } from "next-auth/react";
 import { cn } from "@/lib/utils"
 import "./globals.css";
 
@@ -15,8 +16,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  session,
 }: Readonly<{
   children: React.ReactNode;
+  session: any;
 }>) {
   return (
     <html lang="en">
@@ -25,7 +28,11 @@ export default function RootLayout({
           "min-h-screen bg-background antialiased",
           inter.className
         )}
-      >{children}</body>
+      >
+        <SessionProvider session={session}>
+          {children}
+        </SessionProvider>
+      </body>
     </html>
   );
 }

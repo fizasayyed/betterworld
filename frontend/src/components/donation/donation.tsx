@@ -1,24 +1,32 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client"
+
 import * as React from "react";
+import { useFormStore } from "@/lib/useFormStore";
 import { Button } from "@/components/ui/button";
 import {
     Card,
-    CardContent,
     CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
+import { useRouter } from "next/navigation";
 
 export default function Donation() {
+    const updateAmount = useFormStore((state) => state.updateAmount);
+    const router = useRouter();
+
+    const handleDonateClick = (amount: number) => {
+        updateAmount(amount); // save the selected amount to Zustand store
+        router.push("/donate");
+    };
     return (
         <div className="flex flex-col items-center px-10 mt-8">
             <div className="flex">
@@ -33,7 +41,7 @@ export default function Donation() {
                             <CardTitle>₹ {amount}</CardTitle>
                             <CardDescription>Make an impact with your donation.</CardDescription>
                         </CardHeader>
-                        <CardContent>
+                        {/* <CardContent>
                             <form>
                                 <div className="grid w-full items-center gap-4">
                                     <div className="flex flex-col space-y-1.5">
@@ -42,9 +50,9 @@ export default function Donation() {
                                     </div>
                                 </div>
                             </form>
-                        </CardContent>
+                        </CardContent> */}
                         <CardFooter className="flex justify-between">
-                            <Button size="sm" className="font-semibold text-gray-700">Donate</Button>
+                            <Button onClick={() => handleDonateClick(amount)} size="sm" className="font-semibold text-gray-700">Donate</Button>
                         </CardFooter>
                     </Card>
                 ))}
