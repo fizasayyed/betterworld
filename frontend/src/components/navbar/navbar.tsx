@@ -13,8 +13,8 @@ import {
 } from "@/components/ui/menubar"
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 import Image from "next/image";
-import SignIn from "../signinForm/signin";
-import { SignOut } from "../signoutForm/signout";
+import SignIn from "../signinform/signin";
+import { SignOut } from "../signoutform/signout";
 
 export function MenubarDemo() {
     const router = useRouter();

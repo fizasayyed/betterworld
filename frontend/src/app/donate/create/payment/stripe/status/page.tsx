@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card"
 import { MenubarDemo } from "@/components/navbar/navbar"
 import Footer from "@/components/footer/footer"
 import { StepProgressBar } from "@/components/ui/progressbar"
-import CompletePage from "@/components/paymentCompleteForm/completeForm"
+import CompletePage from "@/components/completeform/completeform"
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
