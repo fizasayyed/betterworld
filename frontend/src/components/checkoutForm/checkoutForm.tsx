@@ -27,7 +27,7 @@ const CheckoutForm = () => {
     //     }
     // }, [router, stripe]);
 
-const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (!stripe || !elements) {
@@ -36,10 +36,10 @@ const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         }
 
         // Confirm the payment
-    const result = await stripe.confirmPayment({
+        const result = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: 'http://localhost:3000/donate/create/payment/stripe/status',
+                return_url: `${process.env.NEXT_PUBLIC_DOMAIN}/donate/create/payment/stripe/status`,
             },
         });
 
