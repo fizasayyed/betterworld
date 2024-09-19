@@ -34,10 +34,8 @@ export default function StripeDemo() {
     }, [amount]); // Run the effect when 'amount' changes and is valid
 
     const options = clientSecret
-        ? {
-            clientSecret: clientSecret,
-        }
-        : "";
+        ? { clientSecret } // If clientSecret exists, set options
+        : undefined; // If not, set options as undefined
 
     return (
         <>

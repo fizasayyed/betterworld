@@ -25,14 +25,6 @@ export const createPaymentIntent = async (amount: number, currency = 'usd') => {
     }
 };
 
-export const handlePaymentMethod = async () => {
-    const stripe = useStripe();
-    await stripe?.createPaymentMethod({
-        type: 'card',
-        card: cardElement,
-    })
-};
-
 export const testService = async () => {
 
     const response = await fetch(`${domain.hostname}/${domain.endpoint.testAPI}`, {
@@ -47,6 +39,6 @@ export const testService = async () => {
         return data;
 
     } catch (error) {
-        console.log("Error occured during API call", error);
+        console.log("Error occurred during API call", error);
     }
 }

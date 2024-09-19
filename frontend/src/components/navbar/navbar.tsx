@@ -38,7 +38,6 @@ export function MenubarDemo() {
                                 <MenubarSubContent>
                                     <MenubarItem>Email link</MenubarItem>
                                     <MenubarItem>Messages</MenubarItem>
-                                    <MenubarItem>Notes</MenubarItem>
                                 </MenubarSubContent>
                             </MenubarSub>
                         </MenubarContent>

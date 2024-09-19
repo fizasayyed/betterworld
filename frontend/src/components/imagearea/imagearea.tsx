@@ -31,7 +31,7 @@ export default function ImageArea() {
             </Button>
         </div>
             <div className="flex row px-10 py-10 text-xl items-center">
-                <p className="max-w-9xl text-xl font-semibold text-gray-700 text-center leading-loose">In a world facing the pressing threat of climate change, every action counts.
+                <p className="max-w-8xl px-10 text-xl font-semibold text-gray-700 text-center leading-loose">In a world facing the pressing threat of climate change, every action counts.
                     By supporting our green environment activism, you're directly contributing to a healthier planet for future generations.
                     Your donation will help fund vital initiatives such as reforestation projects,
                     renewable energy research, and educational programs that promote sustainable living.

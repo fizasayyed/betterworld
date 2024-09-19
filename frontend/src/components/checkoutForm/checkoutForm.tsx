@@ -3,6 +3,7 @@
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { FormEvent } from 'react';
 
 const CheckoutForm = () => {
     const stripe = useStripe(); // Stripe instance
@@ -26,7 +27,7 @@ const CheckoutForm = () => {
     //     }
     // }, [router, stripe]);
 
-    const handleSubmit = async (event) => {
+const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (!stripe || !elements) {
@@ -34,18 +35,17 @@ const CheckoutForm = () => {
             return;
         }
 
-        const { error, paymentIntent } = await stripe.confirmPayment({
+        // Confirm the payment
+    const result = await stripe.confirmPayment({
             elements,
             confirmParams: {
                 return_url: 'http://localhost:3000/donate/create/payment/stripe/status',
             },
         });
 
-        if (error) {
-            console.error(error.message);
-        } else if (paymentIntent?.status === 'succeeded') {
-            // updatePaymentStatus(paymentIntent.id); // Store the payment intent ID
-            router.push('/donate/create/payment/stripe/status');
+        // Handle errors
+        if (result.error) {
+            console.error(result.error.message);
         }
     };
 
