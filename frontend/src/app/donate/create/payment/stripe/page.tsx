@@ -42,13 +42,13 @@ export default function StripeDemo() {
             <div className="overflow-y-hidden">
                 <MenubarDemo />
             </div>
-            <div className="flex flex-col items-center justify-top py-10">
+            <div className="flex flex-col items-center justify-top py-5">
                 <h2 className="text-xl font-bold mb-6 text-center">
                     Tell Us More About Yourself
                 </h2>
                 <div className="w-full max-w-lg mt-8">
-                    <Card className="mx-auto p-10">
-                        <div className="w-full max-w-md pb-8">
+                    <Card className="mx-auto p-5">
+                        <div className="w-full max-w-md py-2">
                             <StepProgressBar currentStep={currentStep} />
                         </div>
                         {clientSecret ? (
