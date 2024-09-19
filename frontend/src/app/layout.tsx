@@ -16,10 +16,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  session,
 }: Readonly<{
   children: React.ReactNode;
-  session: any;
 }>) {
   return (
     <html lang="en">
@@ -29,7 +27,7 @@ export default function RootLayout({
           inter.className
         )}
       >
-        <SessionProvider session={session}>
+        <SessionProvider>
           {children}
         </SessionProvider>
       </body>

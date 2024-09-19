@@ -7,7 +7,7 @@ import { CheckCircle } from "lucide-react";
 export default function CompletePage() {
     const stripe = useStripe();
     const [status, setStatus] = React.useState("default");
-    const [intentId, setIntentId] = React.useState(null);
+    const [intentId, setIntentId] = React.useState<string | null>(null);
 
     React.useEffect(() => {
         if (!stripe) {

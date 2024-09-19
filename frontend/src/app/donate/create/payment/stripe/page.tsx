@@ -6,7 +6,7 @@ import { Elements } from "@stripe/react-stripe-js"
 import { createPaymentIntent } from "@/lib/api/apiClient"
 import { Card } from "@/components/ui/card"
 import { MenubarDemo } from "@/components/navbar/navbar"
-import CheckoutForm from "@/components/checkoutform/checkoutform"
+import CheckoutForm from "@/components/checkoutForm/checkoutForm"
 import Footer from "@/components/footer/footer"
 import { StepProgressBar } from "@/components/ui/progressbar"
 import { useFormStore } from "@/lib/useFormStore"
@@ -34,10 +34,8 @@ export default function StripeDemo() {
     }, [amount]); // Run the effect when 'amount' changes and is valid
 
     const options = clientSecret
-        ? {
-            clientSecret: clientSecret,
-        }
-        : "";
+        ? { clientSecret } // If clientSecret exists, set options
+        : undefined; // If not, set options as undefined
 
     return (
         <>
