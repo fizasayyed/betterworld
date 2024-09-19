@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "betterworld-backend",
+  "builds": [
+    {
+      "src": "app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/app.js"
+    }
+  ]
+}
